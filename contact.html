@@ -23,15 +23,46 @@
     </nav>
 
     <section class="hero">
-    <h2>Contact Me</h2>
+        <h2>Contact Me</h2>
 
-    <form class="contact-form">
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea placeholder="Your Message" rows="5" required></textarea>
-        <button type="submit">Send Message</button>
-    </form>
-</section>
+        <!-- Updated Contact Form -->
+        <form id="contact-form">
+            <input type="text" name="user_name" placeholder="Your Name" required>
+            <input type="email" name="user_email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- EmailJS Scripts -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("70V9oVMl7AhrGZZ5S"); // Your Public Key
+        })();
+
+        const form = document.getElementById('contact-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Send message to yourself
+            emailjs.sendForm('service_cvqurqh', 'template_k82ri5y', this)
+                .then(() => {
+                    // Send auto-reply to user
+                    emailjs.sendForm('service_cvqurqh', 'template_wukhuxp', this)
+                        .then(() => {
+                            alert('Message sent and confirmation email sent!');
+                            form.reset();
+                        }, (err) => {
+                            console.error('Auto-reply failed:', err);
+                            alert('Message sent, but confirmation email failed.');
+                        });
+                }, (err) => {
+                    console.error('Sending message failed:', err);
+                    alert('Failed to send message. Please try again.');
+                });
+        });
+    </script>
 
 </body>
 </html>
