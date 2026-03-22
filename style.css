@@ -10,9 +10,10 @@ body {
 /* NAVIGATION */
 nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* logo left, nav links right */
     align-items: center;
     padding: 20px 40px;
+    flex-wrap: wrap; /* ensures wrapping on very small screens */
 }
 
 nav h1 {
@@ -22,7 +23,7 @@ nav h1 {
 nav ul {
     list-style: none;
     display: flex;
-    flex-direction: row; /* horizontal always */
+    flex-direction: row; /* always horizontal */
     gap: 20px;
     padding: 0;
     margin: 0;
@@ -112,7 +113,7 @@ nav a:hover {
     flex-direction: column; /* vertical stack always */
     gap: 1rem; /* spacing between fields */
     max-width: 500px;
-    margin: 30px auto; /* center form vertically */
+    margin: 30px auto; /* center form */
     width: 100%;
 }
 
@@ -182,19 +183,23 @@ nav a:hover {
 
 /* RESPONSIVE ADJUSTMENTS */
 @media (max-width: 768px) {
+    /* Keep nav horizontal, logo left, links right */
+    nav {
+        padding: 15px 20px;
+    }
+
+    nav ul {
+        flex-direction: row; /* horizontal always */
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
     .hero p {
         font-size: 16px;
     }
 
     .projects-card {
-        width: 100%; /* stack project cards on mobile */
+        width: 100%;
         max-width: 350px;
-    }
-
-    /* Keep navigation horizontal on mobile */
-    nav ul {
-        flex-direction: row;
-        gap: 15px;
-        flex-wrap: wrap;
     }
 }
